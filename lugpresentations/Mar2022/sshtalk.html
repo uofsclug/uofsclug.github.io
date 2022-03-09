@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>SSH Talk</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+<script>
+      mermaid.initialize({ startOnLoad: true });
+</script>
+<h1>SSH TALK - March 8, 2022</h1>
+<img border="0" alt="AboutMe" src="https://avatars.githubusercontent.com/u/72484879?v=4" width="200" height="200">
+<h3>About me:</h3>
+<ul>
+	<li>Sysadmin for 10+ years</li>
+	<li>Focus in IT Security</li>
+	<li>Always learning...</li>
+</ul>
+
+<h1>Outline:</h1>
+<ul>
+	<li>What is SSH?</li>
+	<li>How does SSH work?</li>
+	<li>Cool examples</li>
+</ul>
+<h1>What is SSH?</h1>
+<p>SSH (secure shell) is a <i>client/server</i> remote access tool used primarily on Unix systems
+(AIX, Solaris, Linux, Unix, etc...). Originally developed in 1995 as an alternative to 
+unencrypted <b>rsh</b>, <b>telnet</b>, and <b>rlogin</b>, it has become the standard method of connecting to 
+networked systems of the *nix persuasion.
+<br>
+OpenSSH is the major player, but there are other variants of the protocol,
+like DropBear which is sometimes found on embedded devices.</p>
+
+<h1>How does SSH work?</h1>
+<p><b>Client/Server over encrypted channels</b>.
+<br>
+A user uses an SSH client to connect to a networked system when has a
+listening SSH service/daemon/socket (IPADDR + PORT = SOCKET). 
+<br>
+<br>
+When the daemon catches an SSH request, a secure pipe is created between the client and 
+server overwhich credentials can be securily typed or passed via keys to authenticate the 
+user. Assuming all goes well the now authenticated user will be served a terminal.</p>
+<hr>
+<h1>Demonstration 1</h1>
+<p>Create key pairs for 'crashdummy' user</p>
+<pre><code>
+# Create key pair
+$ ssh-keygen -t ecdsa
+
+# Default path
+$ ls -al ~/.ssh/
+<b>id_ecdsa</b>
+<b>id_ecdsa.pub</b>
+
+# SSH to remote system
+$ ssh 192.168.1.56
+
+# Show 'known_hosts'
+$ ls -al ~/.ssh/
+id_ecdsa
+id_ecdsa.pub
+<b>known_hosts</b>
+
+# Push SSH public key
+$ ssh-copy-id 192.168.1.56
+
+# Check server side..
+$ ls ~/.ssh/
+<b>authorized_keys</b>
+</code>
+</pre>
+<hr>
+<h1>Demonstration 2</h1>
+<p>Secure an otherwise insecure login</p><br>
+<h3>Step 1</h3>
+<p>First, build the secure tunnel through your SSH server</p>
+<pre><code>ssh -L 2323:insecure:23 sshserver</code></pre>
+        <br>
+<div class="mermaid">
+    flowchart LR
+    A[localhost] --> |ssh 22| B[sshserver] --> |telnet 23| C[insecure]
+</div>
+<h3>Step 2</h3>
+<p>Next, connect to the insecure host over your local secure tunnel</p>
+<pre><code>telnet localhost 2323</code></pre>
+        <br>
+<div class="mermaid">
+    flowchart LR
+    A[localhost] --> |telnet 2323| A[Localhost]
+    A[localhost] -.-> |ssh 22| B[sshserver] -.-> |telnet 23| C[insecure] -.-> |local 2323| A[localhost]
+</div>
+<hr>
+<h1>
+	Sources and References:
+</h1>
+<a href="https://mwl.io/nonfiction/tools#ssh">
+	<img border="0" alt="SSHMastery" src="https://i0.wp.com/mwl.io/wp-content/uploads/2018/08/ssh2e-apple-cover-2018-02-06.jpg?resize=200%2C300&ssl=1" width="100" height="100"></a><br>
+<a href="https://www.openssh.com/">OpenSSH</a><br>
+<a href="https://matt.ucc.asn.au/dropbear/dropbear.html">Dropbear</a><br>
+<a href="https://mermaid-js.github.io/mermaid/#/">Mermaid</a><br>
+</body>
+</html>
