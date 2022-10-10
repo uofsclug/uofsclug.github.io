@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Ansible AWX Presentation</title>
+<style>
+body {
+  margin: auto;
+   
+  padding: 50px;
+  font-family: 'Avenir', sans-serif; 
+  color: #33475b;    
+}
+
+/* Centered Image Code */
+
+img {
+  display: block;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/atom-one-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/languages/go.min.js"></script> 
+ 
+</head>
+<body>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<h1>Ansible AWX Talk - October 18, 2022 </h1>
+
+<h1>Outline:</h1>
+<ul>
+	<li>What is AWX?</li>
+	<li>How is AWX deployed?</li>
+	<li>Examples of what AWX can do</li>
+</ul>
+
+<h1>What is AWX?</h1>
+<p>AWX provides a web-based user interface, REST API, and task engine built on top of Ansible. It is one of the upstream projects for <a href="https://www.ansible.com/products/automation-platform">Red Hat Ansible Automation Platform.</a> Specifically from which the <a href="https://www.ansible.com/products/controller">automation controller</a> component <i>(formerly Tower)</i> is derived.
+<br>
+<br>
+AWX is designed to be a frequently released, fast-moving project where all new development happens. <b>VS.</b> Automation controller (Tower) is produced by taking selected releases of AWX, hardening them for long-term supportability, and making them available to customers as a hosted service within Red Hat Ansible Automation Platform.
+<br>
+<br>
+Ansible Automation Platform is fully supported by Red Hat, while AWX is supported by the community. <i>(something to keep in mind)</i>  </p>
+<ul>
+	<li><a href="https://www.ansible.com/products/awx-project/faq">Learn more about the AWX project - FAQ<a></li>
+	<li><a href="https://github.com/ansible/awx">AWX project on GitHub - Get Started<a></li>
+</ul>
+
+<hr>
+<h1>How is AWX deployed?</h1>
+<p><b>Current versions of AWX are deployed by installing via the AWX Operator.</b><p/>
+<ul>
+	<li><a href="https://github.com/ansible/awx-operator">Read the AWX Operator Docs here<a></li>
+</ul>
+<p>This operator is meant to provide a more Kubernetes-native installation method for AWX via an AWX Custom Resource Definition (CRD). This Kubernetes Operator is meant to be deployed in your Kubernetes cluster(s) and can manage one or more AWX instances in any namespace.
+<br>
+<br>
+When you upgrade the AWX version the operator must be upgraded first. They go hand-in-hand.
+<br>
+<br>
+You can install in an existing cluster, create a cluster using Minikube for testing <i>not recommended permanently</i>, or create a new dedicated cluster. 
+<br>
+<br>
+Dont worry, you can also follow a simplified deployment which uses k3s (Rancher) and provides configuration templates for resources and ingress by using this guide: <a href="https://github.com/kurokobo/awx-on-k3s/tree/0.28.0"> AWX on k3s </a>
+<br>
+<br>
+After deployment you will see that all of the required objects have been deployed in the awx namespace.
+</p>
+<pre><code class="shell session">
+$ kubectl -n awx get awx,all,ingress,secrets
+NAME                      AGE
+awx.awx.ansible.com/awx   5m
+
+NAME                                                   READY   STATUS    RESTARTS   AGE
+pod/awx-operator-controller-manager-5d5d58758c-7xcrl   2/2     Running   0          5m35s
+pod/awx-postgres-13-0                                  1/1     Running   0          4m46s
+pod/awx-5b859c644-zp6x5                                4/4     Running   0          4m26s
+
+NAME                                                      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/awx-operator-controller-manager-metrics-service   ClusterIP   10.43.229.20    <none>        8443/TCP   5m45s
+service/awx-postgres-13                                   ClusterIP   None            <none>        5432/TCP   4m46s
+service/awx-service                                       ClusterIP   10.43.135.205   <none>        80/TCP     4m28s
+
+NAME                                              READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/awx-operator-controller-manager   1/1     1            1           5m45s
+deployment.apps/awx                               1/1     1            1           4m26s
+
+NAME                                                         DESIRED   CURRENT   READY   AGE
+replicaset.apps/awx-operator-controller-manager-5d5d58758c   1         1         1       5m35s
+replicaset.apps/awx-5b859c644                                1         1         1       4m26s
+
+NAME                               READY   AGE
+statefulset.apps/awx-postgres-13   1/1     4m46s
+
+NAME                                    CLASS    HOSTS             ADDRESS                                               PORTS     AGE
+ingress.networking.k8s.io/awx-ingress   <none>   awx.example.com   192.168.0.219,2400:4050:a8e2:a00:250:56ff:fe86:454d   80, 443   4m27s
+
+NAME                                  TYPE                             DATA   AGE
+secret/awx-admin-password             Opaque                           1      5m
+secret/awx-postgres-configuration     Opaque                           6      5m
+secret/awx-secret-tls                 kubernetes.io/tls                2      5m
+secret/redhat-operators-pull-secret   kubernetes.io/dockerconfigjson   1      5m
+secret/awx-app-credentials            Opaque                           3      4m30s
+secret/awx-secret-key                 Opaque                           1      4m55s
+secret/awx-broadcast-websocket        Opaque                           1      4m52s
+</code>
+</pre>
+
+<hr>
+<h1>Examples of what AWX can do</h1>
+<ul>
+	<li>Helps standardize how automation is deployed, initiated, delegated, and audited. </li>
+	<li>RBAC, manage inventory, launch and schedule workflows, track changes, and integrate into reporting, all from a centralized user interface and RESTful API.</li>
+	<li>Integrate with many types of inventory modules, SCM, credential types/mgrs/vaults. </li>
+	<li><b>Scale!</b></li>
+</ul>
+
+<img src="awxdashex.PNG" alt="AWX Dashboard Demo" />
+
+<h1>Brief Demo</h1>
+
+<h1>Open Discussion ???</h1>
+
+</body>
+</html>
