@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Raspberry Pi Demos</title>
+<style>
+body {
+  margin: auto;
+  padding: 50px;
+  font-family: 'Avenir', sans-serif; 
+  color: #33475b;    
+}
+
+/* Centered Image Code */
+
+img {
+  display: block;
+  width: 25%;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/atom-one-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/languages/go.min.js"></script> 
+ 
+</head>
+<body>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<h1>Raspberry Pi Demos - Pi Day! - March 14th, 2024 </h1>
+
+<h1>Outline:</h1>
+<ul>
+	<li>What is a Raspberry Pi</li>
+	<li>Demo 1: AI powered voice virtual assistant on a Pi 4B</li>
+	<li>Demo 2: Pi-Hole Ad Blocker on a Pi Zero W</li>
+</ul>
+
+<h1>What is a Raspberry Pi?</h1>
+<p>The Raspberry Pi is a type of single-board computer (SBC), meaning that its entire hardware set is placed on a single electronics board. It is essentially a minicomputer the size of a credit card (or smaller)!
+<br>
+<br>
+<a href="https://www.raspberrypi.com/for-home/">Learn more and check it out on the official Raspberry Pi site<a>
+<br>
+<br>
+
+<hr>
+<h1>Demo 1: AI-powered voice virtual assistant on a Pi 4B</h1>
+<p><b>This demonstration was based on 2 projects. Read more about them below.</b><p/>
+<ul>
+	<li><a href="https://www.instructables.com/Customizes-a-ChatGPT-Assistant-Using-a-RaspberryPi/">Customize a ChatGPT Assistant Using a RaspberryPi 4b, OpenAI, Azure Speech Services, the Azure Voice You Like and Your Description of Its Personality<a></li>
+	<li><a href="https://learn.adafruit.com/robotic-ai-bear-using-chatgpt/overview">The above project was a reinterpretation of a project involving a robotic AI bear that used ChatGPT <a></li>
+</ul>
+<p>For this basic demonstration we elected to use all pluggable components with nothing required to be wired into the Pi's GPIO pins; this project focused solely on the technology behind the AI-powered voice virtual assistant.  
+<br>
+<br>
+We used a portable speaker which could be connected to the Pi via Bluetooth or audio jack and a USB plug-and-play microphone. The Python code was adapted to remove the input from the button for triggering the AI assistant and instead once activated by starting the script continued to listen and process prompts. 
+<br>
+<br>
+The project utilizes ChatGPT and Azure Cognitive Speach Services (CSS) as is discussed at length in the above links. Several Azure voice models were loaded as options for the script which allowed users to interact with different assistants each providing a unique experience.  
+<br>
+<br>
+Below is an audio recording of what the interaction with the AI assistant sounds like.
+<br>
+<br>
+</p>
+
+<audio controls>
+<!--<source src="horse.ogg" type="audio/ogg"> -->
+  <source src="rpiai.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+
+<p>
+The basic setup looks like below.
+</p>
+<img src="rpi_ai_asst.jpg" alt="Pi AI Demo" />
+
+<hr>
+<h1>Demo 2: Pi-Hole Ad Blocker on a Pi Zero W</h1>
+<p>
+The second project used a Pi Zero W which is even smaller than the Pi 4 B but still has wifi and Bluetooth built in. We installed an Ad Blocker called Pi-Hole which allows you to surf the internet and consume media without the annoying and often overwhelming amount of ads.
+<br>
+<br>
+It does this by acting as a DNS sinkhole. <a href="https://www.raspberrypi.com/tutorials/running-pi-hole-on-a-raspberry-pi/">Learn more about what this is here!<a>
+<br>
+<br>
+You can follow well-defined tutorials such as the following on how to set up and configure Pi-Hole and how to test it by either manually pointing your device's DNS to it or forcing all devices to use it on a network.
+<ul>
+	<li><a href="https://learn.adafruit.com/pi-hole-ad-blocker-with-pi-zero-w/install-pi-hole">Pi Hole Ad Blocker with Pi Zero W<a></li>
+	<li><a href="https://pi-hole.net/">Even more information!<a></li>
+</ul>
+</p>
+<img src="pihole.png" alt="Pi-Hole Dashboard" style="width:100%;"/>
+
+</body>
+</html>
