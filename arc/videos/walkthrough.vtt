@@ -1,0 +1,163 @@
+WEBVTT
+
+00:00.000 --> 00:05.640
+Welcome to ARC, the Advising and
+Registration Companion AI Powered Agent.
+
+00:06.000 --> 00:10.515
+ARC was designed to help University of
+South Carolina students obtain answers to
+
+00:10.540 --> 00:14.340
+frequently asked questions about
+advising and registration processes,
+
+00:14.580 --> 00:15.900
+procedures, and requirements.
+
+00:18.358 --> 00:19.358
+Let’s dive in!
+
+00:19.598 --> 00:23.258
+ARC is designed to provide
+information specific to the end user.
+
+00:23.718 --> 00:26.978
+The first step is to guide the user
+through selecting their program.
+
+00:27.518 --> 00:30.498
+Users can search for their major
+or use the dropdown features.
+
+00:31.018 --> 00:33.918
+For those undecided, we have
+an option for general guidance.
+
+00:34.578 --> 00:38.993
+Once a major is selected, the tool
+confirms it is focused on the content for
+
+00:39.018 --> 00:40.018
+that major.
+
+00:40.158 --> 00:43.153
+Notice the switch major option
+in the top right corner.
+
+00:43.178 --> 00:48.473
+The ability to switch majors is available
+to the end user at all times to allow
+
+00:48.498 --> 00:50.798
+users to potentially
+compare different majors.
+
+00:53.354 --> 00:57.309
+At this point, users can ask predefined
+questions that are listed to help them
+
+00:57.334 --> 00:59.894
+get started, or they can
+ask their own questions.
+
+01:02.274 --> 01:06.029
+It is important to note that data is
+input and reviewed by subject matter
+
+01:06.054 --> 01:08.534
+experts from three levels
+of the organization:
+
+01:08.954 --> 01:13.549
+university wide administrative content,
+college specific content, and major
+
+01:13.574 --> 01:14.574
+specific content.
+
+01:15.334 --> 01:19.869
+ARC intelligently analyzes all levels
+of content associated with the major and
+
+01:19.894 --> 01:24.329
+returns an answer which also includes
+confidence levels, sources referenced, and
+
+01:24.354 --> 01:25.354
+important notes.
+
+01:26.014 --> 01:30.689
+All data must have an owner, appropriate
+scope tags, effective terms, and Source
+
+01:30.714 --> 01:31.714
+URLs.
+
+01:33.944 --> 01:36.144
+Let’s get into a couple examples:
+
+01:37.098 --> 01:40.413
+In this example we have selected
+the Bachelor of Music major and are
+
+01:40.438 --> 01:42.758
+highlighting a question about
+progression requirements.
+
+01:43.138 --> 01:46.953
+ARC searched the source content and
+returned a response that is found in the
+
+01:46.978 --> 01:48.138
+major level content.
+
+01:50.416 --> 01:54.291
+In our next example, the user asks about
+a deadline for dropping a class without
+
+01:54.316 --> 01:55.316
+a W.
+
+01:55.396 --> 01:59.331
+ARC appropriately returned the policy
+details found in the university wide
+
+01:59.356 --> 02:00.796
+administrative data level.
+
+02:05.929 --> 02:09.444
+In the final examples, the user asks
+a question that highlights the safety
+
+02:09.469 --> 02:10.909
+boundaries designed in ARC.
+
+02:11.309 --> 02:13.809
+The user asks what
+elective is the easiest.
+
+02:14.429 --> 02:18.444
+ARC will refuse questions unrelated to
+its purpose and will return a generic
+
+02:18.469 --> 02:20.309
+response redirecting the user.
+
+02:21.009 --> 02:24.324
+If the user were to ask a question
+concerning information not in the source
+
+02:24.349 --> 02:27.904
+data, ARC will not provide responses
+for questions that it does not have
+
+02:27.929 --> 02:31.544
+adequate source information and points
+to relevant contact information for the
+
+02:31.569 --> 02:32.569
+advising team.
+
+02:34.820 --> 02:36.500
+Thank you for learning more about ARC!
